@@ -1,0 +1,222 @@
+[
+  {
+    "id": "mangues",
+    "title": "Mangues",
+    "category": "Backend",
+    "githubURL": "https://github.com/vitor518/Mangues",
+    "isPublic": true,
+    "technologies": ["TypeScript", "Node.js"],
+    "description": "Sistema completo desenvolvido em TypeScript para gerenciamento eficiente de dados. Implementa arquitetura escalável com tipagem forte e padrões modernos de desenvolvimento.",
+    "badges": ["RECENTE", "DESTAQUE"],
+    "status": "Concluído",
+    "image": "img/projects/mangues.jpg",
+    "language": "TypeScript",
+    "stars": 15,
+    "forks": 3,
+    "lastUpdate": "2025-06-15",
+    "features": [
+      "Arquitetura escalável",
+      "Tipagem forte com TypeScript",
+      "Padrões de desenvolvimento modernos",
+      "Gerenciamento de dados eficiente"
+    ]
+  },
+  {
+    "id": "authjwt",
+    "title": "AuthJWT",
+    "category": "Segurança",
+    "githubURL": "https://github.com/vitor518/AuthJWT",
+    "isPublic": false,
+    "technologies": ["Node.js", "JWT", "Express", "bcrypt"],
+    "description": "Sistema robusto de autenticação e autorização utilizando JSON Web Tokens. Implementa refresh tokens, proteção de rotas, middleware de segurança e hash de senhas com bcrypt.",
+    "badges": ["SEGURANÇA"],
+    "status": "Concluído",
+    "image": "img/projects/authjwt.jpg",
+    "language": "JavaScript",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": "2025-05-20",
+    "features": [
+      "Autenticação com JWT",
+      "Refresh tokens",
+      "Middleware de segurança",
+      "Hash de senhas com bcrypt"
+    ]
+  },
+  {
+    "id": "teodolito",
+    "title": "Teodolito",
+    "category": "Frontend",
+    "githubURL": "https://github.com/vitor518/Teodolito",
+    "isPublic": false,
+    "technologies": ["HTML5", "CSS3", "JavaScript", "Canvas API"],
+    "description": "Aplicação web interativa para cálculos e visualizações de topografia. Interface intuitiva com manipulação de dados geométricos e renderização visual de medições.",
+    "badges": ["FRONTEND"],
+    "status": "Concluído",
+    "image": "img/projects/teodolito.jpg",
+    "language": "JavaScript",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": "2025-04-10",
+    "features": [
+      "Visualização de dados topográficos",
+      "Interface interativa com Canvas API",
+      "Manipulação de dados geométricos",
+      "Renderização visual de medições"
+    ]
+  },
+  {
+    "id": "docker-lista-de-tarefas",
+    "title": "Docker Lista de Tarefas",
+    "category": "DevOps",
+    "githubURL": "https://github.com/vitor518/DockerLista-de-Tarefas",
+    "isPublic": false,
+    "technologies": ["HTML", "CSS", "JavaScript", "Docker", "Docker Compose"],
+    "description": "Aplicação de gerenciamento de tarefas containerizada demonstrando boas práticas de DevOps. Inclui Dockerfile otimizado, docker-compose e documentação completa de deploy.",
+    "badges": ["DEVOPS"],
+    "status": "Concluído",
+    "image": "img/projects/docker-tasks.jpg",
+    "language": "JavaScript",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": "2025-03-30",
+    "features": [
+      "Containerização com Docker",
+      "Orquestração com Docker Compose",
+      "Dockerfile otimizado",
+      "Documentação de deploy"
+    ]
+  },
+  {
+    "id": "crud-csharp-dotnet",
+    "title": "CRUD C# .NET",
+    "category": "Backend",
+    "githubURL": null,
+    "isPublic": false,
+    "technologies": ["C#", ".NET 6+", "Entity Framework Core", "SQL Server", "ASP.NET MVC"],
+    "description": "Sistema CRUD completo em C# seguindo arquitetura em camadas. Implementa padrão Repository, validações robustas, tratamento de exceções e interface responsiva com Razor Pages.",
+    "badges": ["BACKEND"],
+    "status": "Em Desenvolvimento",
+    "image": "img/projects/crud-csharp.jpg",
+    "language": "C#",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": "2025-06-20",
+    "features": [
+      "Arquitetura em camadas",
+      "Padrão Repository",
+      "Validações robustas",
+      "Interface com Razor Pages"
+    ]
+  },
+  {
+    "id": "crud-php-moderno",
+    "title": "CRUD PHP Moderno",
+    "category": "Backend",
+    "githubURL": null,
+    "isPublic": false,
+    "technologies": ["PHP 8+", "MySQL", "Bootstrap 5", "PDO"],
+    "description": "Sistema de gerenciamento CRUD com PHP orientado a objetos. Implementa prepared statements, validações server-side, paginação, busca avançada e design responsivo.",
+    "badges": ["BACKEND"],
+    "status": "Planejado",
+    "image": "img/projects/crud-php.jpg",
+    "language": "PHP",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": null,
+    "features": [
+      "PHP orientado a objetos",
+      "Prepared statements (PDO)",
+      "Validações server-side",
+      "Busca avançada e paginação"
+    ]
+  },
+  {
+    "id": "crud-java-web",
+    "title": "CRUD Java Web",
+    "category": "Full Stack",
+    "githubURL": null,
+    "isPublic": false,
+    "technologies": ["Java 17", "Servlets", "JSP", "JDBC", "MySQL", "Maven"],
+    "description": "Aplicação web Java seguindo padrão MVC. Demonstra conceitos de POO, manipulação de banco de dados com JDBC, sessões e gerenciamento de estado com Servlets/JSP.",
+    "badges": ["FULL STACK"],
+    "status": "Planejado",
+    "image": "img/projects/crud-java.jpg",
+    "language": "Java",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": null,
+    "features": [
+      "Padrão MVC com Servlets/JSP",
+      "Manipulação de banco de dados com JDBC",
+      "Gerenciamento de estado e sessões",
+      "Conceitos de POO aplicados"
+    ]
+  },
+  {
+    "id": "api-rest-spring-boot",
+    "title": "API REST Spring Boot",
+    "category": "Backend",
+    "githubURL": null,
+    "isPublic": false,
+    "technologies": ["Spring Boot 3", "Spring Data JPA", "PostgreSQL", "Swagger", "Docker"],
+    "description": "API RESTful profissional com Spring Boot. Implementa validações com Bean Validation, documentação Swagger/OpenAPI, tratamento global de exceções, testes unitários e containerização.",
+    "badges": ["DESTAQUE", "BACKEND"],
+    "status": "Em Desenvolvimento",
+    "image": "img/projects/api-spring.jpg",
+    "language": "Java",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": "2025-06-25",
+    "features": [
+      "Validações com Bean Validation",
+      "Documentação com Swagger/OpenAPI",
+      "Tratamento global de exceções",
+      "Testes unitários e de integração"
+    ]
+  },
+  {
+    "id": "microservicos-nodejs",
+    "title": "Microserviços com Node.js",
+    "category": "Arquitetura",
+    "githubURL": null,
+    "isPublic": false,
+    "technologies": ["Node.js", "Docker", "Kubernetes", "RabbitMQ", "Redis", "MongoDB"],
+    "description": "Arquitetura de microserviços escalável com comunicação assíncrona. Implementa service discovery, load balancing, circuit breaker e observabilidade com Prometheus/Grafana.",
+    "badges": ["ARQUITETURA"],
+    "status": "Futuro",
+    "image": "img/projects/microservices-node.jpg",
+    "language": "JavaScript",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": null,
+    "features": [
+      "Comunicação assíncrona com RabbitMQ",
+      "Service discovery e load balancing",
+      "Circuit breaker pattern",
+      "Observabilidade com Prometheus/Grafana"
+    ]
+  },
+  {
+    "id": "dashboard-analytics-real-time",
+    "title": "Dashboard Analytics Real-Time",
+    "category": "Real-Time",
+    "githubURL": null,
+    "isPublic": false,
+    "technologies": ["React", "TypeScript", "Node.js", "Socket.io", "Chart.js", "PostgreSQL"],
+    "description": "Dashboard interativo com métricas em tempo real usando WebSockets. Visualizações dinâmicas, filtros avançados, exportação de relatórios e notificações push.",
+    "badges": ["REAL-TIME"],
+    "status": "Futuro",
+    "image": "img/projects/dashboard-realtime.jpg",
+    "language": "TypeScript",
+    "stars": 0,
+    "forks": 0,
+    "lastUpdate": null,
+    "features": [
+      "Atualizações em tempo real com WebSockets",
+      "Visualizações de dados com Chart.js",
+      "Filtros avançados e exportação",
+      "Notificações push"
+    ]
+  }
+]

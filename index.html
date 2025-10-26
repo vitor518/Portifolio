@@ -4,50 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vitor Oliveira | Desenvolvedor Full Stack</title>
 
+    <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Portfólio profissional de Vitor Oliveira, desenvolvedor Full Stack especializado em Node.js, Java e soluções web criativas.">
+        content="Portfólio de Vitor Oliveira, desenvolvedor Full Stack. Explore meus projetos em Node.js, TypeScript, Java, C# e mais. Aberto a novas oportunidades.">
     <meta name="keywords"
-        content="Vitor, Oliveira, desenvolvedor, full stack, Node.js, Java, JavaScript, HTML, CSS, programador, portfólio, web developer, APIs, frontend, backend">
+        content="Vitor Oliveira, desenvolvedor, full stack, Node.js, Java, TypeScript, C#, PHP, Docker, portfolio, web developer, backend, frontend">
     <meta name="author" content="Vitor Oliveira">
+    <link rel="canonical" href="https://vitor-oliveira.dev/">
+    <meta name="robots" content="index, follow">
 
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://seusite.com/">
+    <meta property="og:url" content="https://vitor-oliveira.dev/">
     <meta property="og:title" content="Vitor Oliveira | Desenvolvedor Full Stack">
     <meta property="og:description"
-        content="Portfólio profissional de Vitor Oliveira, desenvolvedor Full Stack especializado em Node.js, Java e soluções web criativas.">
-    <meta property="og:image" content="https://seusite.com/img/share-image.jpg">
+        content="Explore meus projetos e habilidades. Desenvolvedor Full Stack apaixonado por criar soluções robustas e eficientes.">
+    <meta property="og:image" content="https://vitor-oliveira.dev/img/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
+    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://seusite.com/">
+    <meta property="twitter:url" content="https://vitor-oliveira.dev/">
     <meta property="twitter:title" content="Vitor Oliveira | Desenvolvedor Full Stack">
     <meta property="twitter:description"
-        content="Portfólio profissional de Vitor Oliveira, desenvolvedor Full Stack especializado em Node.js, Java e soluções web criativas.">
-    <meta property="twitter:image" content="https://seusite.com/img/share-image.jpg">
+        content="Explore meus projetos e habilidades. Desenvolvedor Full Stack apaixonado por criar soluções robustas e eficientes.">
+    <meta property="twitter:image" content="https://vitor-oliveira.dev/img/og-image.jpg">
 
-    <link rel="icon" type="image/png" href="img/favicon.png" sizes="32x32">
+    <!-- PWA & Theme -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1e88e5">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#f46036">
+    <link rel="icon" href="img/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    </noscript>
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Vitor Oliveira",
+      "url": "https://vitor-oliveira.dev",
+      "sameAs": [
+        "https://www.linkedin.com/in/vitor-oliveira-silva-435122228",
+        "https://github.com/vitor518"
+      ],
+      "jobTitle": "Desenvolvedor Full Stack",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Autônomo"
+      },
+       "image": "https://vitor-oliveira.dev/img/eu.jpg",
+       "description": "Desenvolvedor Full Stack com especialização em backend com Node.js e Java, e frontend com tecnologias web modernas."
+    }
+    </script>
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    </noscript>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SEUCODIGO"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SEUCODIGO');
+    </script>
 
-    <link rel="preload" href="img/sua-foto.jpg" as="image">
+    <!-- Font Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="global.css">
 </head>
 
 <body>
+    <!-- Barra de Progresso de Scroll -->
+    <div id="progress-bar"></div>
+
+    <!-- Notificações Toast -->
+    <div id="toast-container"></div>
+
+    <!-- Switch de Tema -->
     <div class="theme-switch-wrapper">
         <i class="fas fa-sun" aria-hidden="true"></i>
         <label class="theme-switch" for="checkbox">
@@ -57,236 +97,181 @@
         <i class="fas fa-moon" aria-hidden="true"></i>
     </div>
 
+    <!-- Header -->
     <header>
         <div class="container">
-            <img src="eu.jpg" alt="Foto de perfil de Vitor Oliveira, desenvolvedor Full Stack" class="profile-photo"
-                tabindex="0" loading="lazy">
+            <img src="eu.jpg" alt="Foto de perfil de Vitor Oliveira" class="profile-photo" loading="lazy">
             <h1>Vitor Oliveira</h1>
-            <p>Desenvolvedor Full Stack | Node.js, Java, Web</p>
-            <p class="impact-slogan">Transformando ideias em soluções digitais criativas e eficientes.</p>
-            <nav aria-label="Navegação principal do portfólio">
+            <p>Desenvolvedor Full Stack | Backend & Frontend</p>
+            <p class="impact-slogan">Transformando código em soluções robustas e inovadoras.</p>
+
+            <!-- Navegação Desktop -->
+            <nav class="desktop-nav" aria-label="Navegação principal">
                 <ul>
-                    <li><a href="#sobre-mim">Sobre Mim</a></li>
+                    <li><a href="#sobre-mim">Sobre</a></li>
                     <li><a href="#experiencia">Experiência</a></li>
-                    <li><a href="#habilidades">Habilidades</a></li>
                     <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
                     <li><a href="#educacao">Educação</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
+
+            <!-- Botão do Menu Mobile (Hambúrguer) -->
+            <button class="mobile-nav-toggle" aria-controls="mobile-nav" aria-expanded="false">
+                <span class="sr-only">Menu</span>
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
+    <!-- Navegação Mobile -->
+    <div class="mobile-nav" id="mobile-nav">
+        <nav>
+            <ul>
+                <li><a href="#sobre-mim">Sobre</a></li>
+                <li><a href="#experiencia">Experiência</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#educacao">Educação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <main class="container">
+        <!-- SEÇÃO: SOBRE MIM -->
         <section id="sobre-mim" class="visible" aria-labelledby="sobre-mim-heading">
-            <h2 id="sobre-mim-heading" tabindex="0">Sobre Mim</h2>
-            <p>Olá! Sou Vitor Oliveira, um desenvolvedor Full Stack apaixonado por tecnologia e focado em criar software
-                de alta qualidade. Possuo experiência prática e sólida em projetos acadêmicos e pessoais, abrangendo o
-                desenvolvimento de APIs robustas com Node.js, a construção de aplicações web e desktop em Java, além de
-                expertise em automação e design web responsivo.</p>
-            <p>Minha paixão reside em transformar desafios complexos em soluções digitais eficientes e intuitivas. Estou
-                constantemente buscando aprender novas tecnologias, aprimorar minhas habilidades e contribuir para
-                projetos inovadores que impactem positivamente a vida das pessoas.</p>
-            <p>Atualmente, estou em busca de uma oportunidade de estágio ou vaga júnior em desenvolvimento Full Stack.
-                Meu objetivo é aplicar e expandir minhas competências técnicas, colaborar com equipes dinâmicas e
-                crescer profissionalmente em um ambiente que valorize a inovação e o aprendizado contínuo.</p>
+            <h2 id="sobre-mim-heading">Sobre Mim</h2>
+            <p>Olá! Sou Vitor Oliveira, um desenvolvedor Full Stack apaixonado por criar software de alta qualidade. Com foco em backend utilizando Node.js e Java, e frontend com frameworks modernos, busco transformar desafios complexos em soluções digitais eficientes e intuitivas.</p>
         </section>
 
+        <!-- SEÇÃO: EXPERIÊNCIA -->
         <section id="experiencia" aria-labelledby="experiencia-heading">
-            <h2 id="experiencia-heading" tabindex="0">Experiência e Contribuições</h2>
+            <h2 id="experiencia-heading">Experiência e Contribuições</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h4>Desenvolvimento de APIs RESTful com Node.js e Express</h4>
+                    <h4>Desenvolvimento de APIs RESTful com Node.js</h4>
                     <span>2023 - Presente</span>
-                    <p>Criação e manutenção de APIs RESTful escaláveis para diversas aplicações, incluindo a
-                        implementação de CRUDs completos, autenticação JWT, e integração com bancos de dados como
-                        MongoDB e PostgreSQL. Foco na performance e segurança.</p>
+                    <p>Criação de APIs escaláveis com Express, implementando autenticação JWT, CRUDs completos e integração com MongoDB e PostgreSQL.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Desenvolvimento de Aplicações Java (Web e Desktop)</h4>
+                    <h4>Aplicações Java (Web e Desktop)</h4>
                     <span>2024 - Presente</span>
-                    <p>Construção de sistemas robustos e eficientes utilizando Java, aplicando padrões de projeto como
-                        MVC. Desenvolvimento de interfaces com JSP/Servlets para a web e Swing/JavaFX para aplicações
-                        desktop, garantindo usabilidade e funcionalidades completas.</p>
-                </div>
-                <div class="timeline-item">
-                    <h4>Automação e Otimização de Processos com Python/JavaScript</h4>
-                    <span>2023 - Presente</span>
-                    <p>Desenvolvimento de scripts para automatizar tarefas repetitivas, como geração de relatórios,
-                        processamento de dados e interações com APIs externas. Redução significativa do tempo gasto em
-                        processos manuais e aumento da eficiência operacional.</p>
+                    <p>Construção de sistemas robustos com Java, aplicando padrões como MVC com JSP/Servlets e explorando o ecossistema Spring Boot.</p>
                 </div>
             </div>
         </section>
 
-        <section id="habilidades" aria-labelledby="habilidades-heading">
-            <h2 id="habilidades-heading" tabindex="0">Habilidades Técnicas</h2>
-            <ul class="skills-list">
-                <li><i class="fab fa-node-js" aria-hidden="true"></i> Node.js</li>
-                <li><i class="fas fa-server" aria-hidden="true"></i> Express.js</li>
-                <li><i class="fab fa-java" aria-hidden="true"></i> Java (Core, Servlets, JSP)</li>
-                <li><i class="fab fa-html5" aria-hidden="true"></i> HTML5</li>
-                <li><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS3</li>
-                <li><i class="fab fa-js-square" aria-hidden="true"></i> JavaScript (ES6+)</li>
-                <li><i class="fab fa-python" aria-hidden="true"></i> Python</li>
-                <li><i class="fas fa-database" aria-hidden="true"></i> MySQL</li>
-                <li><i class="fas fa-database" aria-hidden="true"></i> PostgreSQL</li>
-                <li><i class="fas fa-database" aria-hidden="true"></i> MongoDB</li>
-                <li><i class="fab fa-git-alt" aria-hidden="true"></i> Git</li>
-                <li><i class="fab fa-docker" aria-hidden="true"></i> Docker</li>
-                <li><i class="fas fa-project-diagram" aria-hidden="true"></i> Metodologias Ágeis (Scrum, Kanban)</li>
-                <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Design Responsivo</li>
-                <li><i class="fas fa-cogs" aria-hidden="true"></i> APIs RESTful</li>
-                <li><i class="fas fa-terminal" aria-hidden="true"></i> Linux/CLI</li>
-            </ul>
-        </section>
-
+        <!-- SEÇÃO: PROJETOS (NOVA ESTRUTURA) -->
         <section id="projetos" aria-labelledby="projetos-heading">
-            <h2 id="projetos-heading" tabindex="0">Projetos em Destaque</h2>
-            <div class="projeto-item">
-                <h3>CRUD de Carros Completo</h3>
-                <p><strong>Tecnologias:</strong> Node.js, Express.js, EJS, MongoDB, JavaScript, CSS3.</p>
-                <p><strong>Descrição:</strong> Sistema web robusto para gestão completa de veículos, permitindo
-                    cadastro, leitura, atualização e exclusão de dados de forma intuitiva. A interface foi construída
-                    com EJS, proporcionando uma experiência dinâmica e eficiente para o usuário.</p>
-                <p>
-                    <a href="https://github.com/vitor518/crud-carros" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver o projeto CRUD de Carros no GitHub"><i class="fab fa-github"
-                            aria-hidden="true"></i> Ver no GitHub</a>
-                    <a href="exemplos/completoBanco.html" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver demonstração ao vivo do CRUD de Carros"><i class="fas fa-external-link-alt"
-                            aria-hidden="true"></i> Ver Demo ao Vivo</a>
-                </p>
-            </div>
-            <div class="projeto-item">
-                <h3>Sistema de Cadastro de Pessoas</h3>
-                <p><strong>Tecnologias:</strong> Node.js, Express.js, EJS, PostgreSQL/MySQL, JavaScript.</p>
-                <p><strong>Descrição:</strong> Aplicação completa para cadastro e gerenciamento de registros de pessoas,
-                    demonstrando habilidades em persistência de dados e manipulação de formulários. O foco foi na
-                    integridade dos dados e na usabilidade da interface web.</p>
-                <p>
-                    <a href="https://github.com/vitor518/cadastro-pessoas" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver o projeto Cadastro de Pessoas no GitHub"><i class="fab fa-github"
-                            aria-hidden="true"></i> Ver no GitHub</a>
-                    <a href="exemplos/cadastroPessoas.html" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver demonstração ao vivo do Sistema de Cadastro de Pessoas"><i
-                            class="fas fa-external-link-alt" aria-hidden="true"></i> Ver Demo ao Vivo</a>
-                </p>
-            </div>
-            <div class="projeto-item">
-                <h3>Scripts de Automação e Integração</h3>
-                <p><strong>Tecnologias:</strong> Python, JavaScript, APIs REST.</p>
-                <p><strong>Descrição:</strong> Desenvolvimento de scripts personalizados para automatizar tarefas
-                    repetitivas, como a geração automática de relatórios detalhados e a integração de dados entre
-                    diferentes sistemas utilizando APIs REST. Esses projetos visaram aumentar a eficiência e reduzir
-                    erros manuais.</p>
-                <p>
-                    <a href="https://github.com/vitor518/automacao-relatorios" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver scripts de Automação e Integração no GitHub"><i class="fab fa-github"
-                            aria-hidden="true"></i> Ver no GitHub</a>
-                    <a href="exemplos/automacao.html" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver demonstração ao vivo de Scripts de Automação e Integração"><i
-                            class="fas fa-external-link-alt" aria-hidden="true"></i> Ver Demo ao Vivo</a>
-                </p>
-            </div>
-            <div class="projeto-item">
-                <h3>Chat Web em Tempo Real</h3>
-                <p><strong>Tecnologias:</strong> JavaScript (Vanilla), HTML5, CSS3, WebSockets (conceito).</p>
-                <p><strong>Descrição:</strong> Um sistema de chat web interativo desenvolvido como prova de conceito
-                    para comunicação em tempo real. Demonstra o uso de JavaScript para manipulação dinâmica do DOM e
-                    conceitos de troca de mensagens instantâneas.</p>
-                <p>
-                    <a href="https://github.com/vitor518/chat-web" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver o projeto Chat Web no GitHub"><i class="fab fa-github" aria-hidden="true"></i>
-                        Ver no GitHub</a>
-                    <a href="exemplos/chatWeb.html" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver demonstração ao vivo do Chat Web em Tempo Real"><i
-                            class="fas fa-external-link-alt" aria-hidden="true"></i> Ver Demo ao Vivo</a>
-                </p>
-            </div>
-            <div class="projeto-item">
-                <h3>Aplicações Java Web com Padrão MVC</h3>
-                <p><strong>Tecnologias:</strong> Java, Servlets, JSP, JDBC, MySQL, HTML, CSS.</p>
-                <p><strong>Descrição:</strong> Coleção de projetos web desenvolvidos em Java, aplicando rigorosamente o
-                    padrão de arquitetura MVC. Incluem funcionalidades como sistemas de autenticação de usuários, CRUDs
-                    de entidades e integrações com bancos de dados relacionais.</p>
-                <p>
-                    <a href="https://github.com/vitor518/java-mvc-projetos" target="_blank" rel="noopener noreferrer"
-                        aria-label="Ver projetos Java MVC no GitHub"><i class="fab fa-github" aria-hidden="true"></i>
-                        Ver no GitHub</a>
-                </p>
-            </div>
-        </section>
+            <h2 id="projetos-heading">🚀 Projetos em Destaque</h2>
+            <p class="section-subtitle">"Transformando código em soluções"</span></p>
 
-        <section id="educacao" aria-labelledby="educacao-heading">
-            <h2 id="educacao-heading" tabindex="0">Educação e Certificações</h2>
-            <div class="timeline">
-                <div class="education-item">
-                    <h4>CURSO TÉCNICO INTEGRADO AO ENSINO MÉDIO EM INFORMÁTICA
-                        PARA INTERNET</h4>
-                    <span>Instituto Federal de Educação Ciência e Tecnologia do Estado de São Paulo, IFSP - Salto
-                        Jan/2023 – Atualmente (Previsão de Conclusão: Dez/2025)</span>
-                    <p>Formação abrangente em diversas áreas da tecnologia, desenvolvimento de software, incluindo
-                        programação web, banco de dados, lógica de programação, engenharia de software e metodologias
-                        ágeis. E infraestrutura, redes, devOps, nuvem... Projetos práticos e focados no mercado. </p>
+            <div class="project-controls">
+                <div id="project-filters" class="project-filters" aria-label="Filtros de projetos">
+                    <!-- Botões de filtro serão gerados via JS -->
+                </div>
+                <div class="search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Buscar por nome ou tecnologia...">
                 </div>
             </div>
+
+            <div id="projects-grid" class="projects-grid" aria-live="polite">
+                <!-- Cards de projeto serão injetados aqui pelo JS -->
+                <!-- Skeleton Loader -->
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
         </section>
 
-        <section id="contato" aria-labelledby="contato-heading">
-            <h2 id="contato-heading" tabindex="0">Vamos Conversar!</h2>
-            <p>Estou sempre aberto a novas oportunidades de colaboração, estágios, projetos desafiadores ou apenas para
-                trocar ideias. Se você gostou do meu trabalho, sinta-se à vontade para entrar em contato!</p>
-            <ul class="contato-list">
-                <li><strong>Email:</strong> <a href="mailto:vtr17.on@gmail.com" id="email-contact"
-                        aria-label="Enviar email para vtr17.on@gmail.com">vtr17.on@gmail.com</a> <span
-                        id="copy-feedback" class="copy-feedback" aria-live="polite">Copiado!</span></li>
-                <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vitor-oliveira-silva"
-                        target="_blank" rel="noopener noreferrer"
-                        aria-label="Visitar perfil do LinkedIn">linkedin.com/in/vitor</a></li>
-                <li><strong>GitHub:</strong> <a href="https://github.com/vitor518" target="_blank"
-                        rel="noopener noreferrer" aria-label="Visitar perfil do GitHub">github.com/vitor518</a></li>
-                <li><strong>Portfólio Online:</strong> <a href="https://seusite.com" target="_blank"
-                        rel="noopener noreferrer" aria-label="Visitar portfólio online">seusite.com</a></li>
+        <!-- SEÇÃO: HABILIDADES -->
+        <section id="habilidades" aria-labelledby="habilidades-heading">
+            <h2 id="habilidades-heading">Habilidades Técnicas</h2>
+            <ul class="skills-list">
+                <!-- Habilidades serão mantidas como no original -->
+                 <li><i class="fab fa-node-js"></i> Node.js</li>
+                <li><i class="fas fa-server"></i> Express.js</li>
+                <li><i class="fab fa-java"></i> Java</li>
+                <li><i class="fas fa-leaf"></i> Spring Boot</li>
+                <li><i class="fab fa-js-square"></i> JavaScript</li>
+                <li><i class="fas fa-bold"></i> TypeScript</li>
+                <li><i class="fab fa-react"></i> React</li>
+                <li><i class="fab fa-html5"></i> HTML5</li>
+                <li><i class="fab fa-css3-alt"></i> CSS3</li>
+                <li><i class="fas fa-database"></i> SQL & NoSQL</li>
+                <li><i class="fab fa-docker"></i> Docker</li>
+                <li><i class="fab fa-git-alt"></i> Git</li>
             </ul>
+        </section>
+
+        <!-- SEÇÃO: EDUCAÇÃO -->
+        <section id="educacao" aria-labelledby="educacao-heading">
+            <h2 id="educacao-heading">Educação</h2>
+            <div class="education-item">
+                <h4>Técnico em Informática para Internet</h4>
+                <span>IFSP - Salto (2023 – 2025)</span>
+                <p>Formação em desenvolvimento web, banco de dados, engenharia de software e infraestrutura.</p>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: CONTATO -->
+        <section id="contato" aria-labelledby="contato-heading">
+            <h2 id="contato-heading">Vamos Conversar!</h2>
+            <p>Aberto a novas oportunidades e colaborações. Entre em contato!</p>
+
             <div class="social-links">
-                <a href="www.linkedin.com/in/vitor-oliveira-silva-435122228" target="_blank"
-                    aria-label="Visitar perfil do LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="www.github.com/vitor518" target="_blank" aria-label="Visitar perfil do GitHub"><i
-                        class="fab fa-github"></i></a>
-                <a href="mailto:vtr17.on@gmail.com" aria-label="Enviar um e-mail para Vitor"><i
-                        class="fa fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/vitor-oliveira-silva-435122228" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/vitor518" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:vtr17.on@gmail.com" aria-label="E-mail"><i class="fa fa-envelope"></i></a>
             </div>
 
-            <form action="https://formspree.io/f/seu-id-formspree" method="POST" class="contact-form"
-                aria-label="Formulário de contato direto">
-                <h3>Envie uma mensagem direta</h3>
-                <label for="form-name">Nome Completo:</label>
-                <input type="text" id="form-name" name="name" required placeholder="Seu nome completo"
-                    aria-required="true">
+            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                <input type="hidden" name="access_key" value="SUA_CHAVE_DE_ACESSO_AQUI">
+                <input type="hidden" name="subject" value="Novo Contato do Portfólio!">
+                <input type="hidden" name="from_name" value="Meu Portfólio">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-                <label for="form-email">Seu Melhor E-mail:</label>
-                <input type="email" id="form-email" name="email" required placeholder="vtr17.on@gmail.com"
-                    aria-required="true">
+                <label for="form-name">Nome:</label>
+                <input type="text" id="form-name" name="name" required placeholder="Seu nome completo">
 
-                <label for="form-message">Sua Mensagem:</label>
-                <textarea id="form-message" name="message" rows="6" required placeholder="Escreva sua mensagem aqui..."
-                    aria-required="true"></textarea>
+                <label for="form-email">E-mail:</label>
+                <input type="email" id="form-email" name="email" required placeholder="seu.email@exemplo.com">
 
+                <label for="form-message">Mensagem:</label>
+                <textarea id="form-message" name="message" rows="5" required placeholder="Sua mensagem..."></textarea>
+
+                <div id="form-result"></div>
                 <button type="submit" class="button-gradient-submit">Enviar Mensagem</button>
             </form>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Vitor Oliveira. Todos os direitos reservados. Última atualização: Junho de 2025.</p>
+            <p>&copy; <span id="current-year"></span> Vitor Oliveira. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <button onclick="topFunction()" id="scrollToTopBtn" title="Voltar ao topo" aria-label="Voltar ao topo da página"><i
-            class="fas fa-arrow-up"></i></button>
-    <script src="script.js"></script>
+    <!-- Botão Scroll-to-Top -->
+    <button id="scrollToTopBtn" title="Voltar ao topo" aria-label="Voltar ao topo da página">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Modal de Detalhes do Projeto -->
+    <div id="project-modal" class="modal-overlay" aria-modal="true" role="dialog" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <div id="modal-body">
+                <!-- Conteúdo do modal será injetado aqui -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 
 </html>
