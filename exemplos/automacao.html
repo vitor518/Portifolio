@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripts de Automação e Integração (Demo)</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    /* Estilo para o bloco de automação */
+    .automacao-demo {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #1e88e510;
+      padding: 32px 28px;
+    }
+    .automacao-demo h2 { color: #1976d2; }
+    .automacao-demo button {
+      background: linear-gradient(45deg, #1976d2, #64b5f6);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 18px;
+      margin-right: 10px;
+      transition: background 0.2s;
+    }
+    .automacao-demo button:hover {
+      background: linear-gradient(45deg, #1565c0, #42a5f5);
+    }
+    .automacao-demo pre {
+      background: #f7fafc;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      overflow-x: auto;
+    }
+    .automacao-demo .actions {
+      margin-bottom: 18px;
+    }
+    .automacao-demo .alerta {
+      color: #d32f2f;
+      font-size: 0.98rem;
+      margin-bottom: 10px;
+    }
+    .automacao-demo .sucesso {
+      color: #388e3c;
+      font-size: 0.98rem;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="automacao-demo">
+      <h2>Scripts de Automação e Integração</h2>
+      <p>
+        Este exemplo demonstra como automatizar tarefas no seu computador usando Python e a biblioteca <code>pyautogui</code>.
+        O script abre o navegador, digita o endereço do seu GitHub, e depois acessa o YouTube automaticamente.
+      </p>
+      <ul>
+        <li>Abre o navegador Google Chrome na página inicial do Google</li>
+        <li>Digita o endereço do seu GitHub</li>
+        <li>Após alguns segundos, volta para o Google e digita o endereço do YouTube</li>
+      </ul>
+      <div class="alerta">
+        <strong>Observação:</strong> Para funcionar, você precisa ter o Python instalado e os pacotes <code>pyautogui</code> e <code>webbrowser</code>.<br>
+        Instale o pyautogui com: <code>pip install pyautogui</code>
+      </div>
+      <div class="actions">
+        <button onclick="copiarPython()">Copiar código Python</button>
+        <button onclick="window.open('https://github.com/vitor518', '_blank')">Ir para meu GitHub</button>
+        <button onclick="baixarScript()">Executar Demo</button>
+      </div>
+      <pre id="codigoPython">
+# Script de automação para abrir o GitHub e YouTube no navegador
+import pyautogui
+import webbrowser
+import time
+
+# Abre o navegador no Google
+webbrowser.open('https://www.google.com')
+time.sleep(3)
+
+# Digita o endereço do GitHub e acessa
+pyautogui.write('github.com/vitor518', interval=0.1)
+pyautogui.press('enter')
+time.sleep(5)
+
+# Volta para o Google
+webbrowser.open('https://www.google.com')
+time.sleep(3)
+
+# Digita o endereço do YouTube e acessa
+pyautogui.write('youtube.com', interval=0.1)
+pyautogui.press('enter')
+time.sleep(5)
+      </pre>
+      <span id="copiadoMsg" class="sucesso" style="display:none;">Código copiado!</span>
+      <div id="instrucoes" style="margin-top:18px; color:#1976d2; font-size:1rem; display:none;">
+        <strong>Como executar:</strong><br>
+        1. Baixe o arquivo <b>abrir_github.py</b>.<br>
+        2. Instale o pacote <code>pyautogui</code> com <code>pip install pyautogui</code>.<br>
+        3. Execute o script no seu computador.<br>
+        <span style="color:#d32f2f;">Por segurança, scripts Python só podem ser executados localmente.</span>
+      </div>
+      <p>Copie o código acima, cole em um arquivo <b>abrir_github.py</b> ou clique em "Executar Demo" para baixar e executar no seu computador.</p>
+    </div>
+  </main>
+  <script>
+    // Função para copiar o código Python para a área de transferência
+    function copiarPython() {
+      const codigo = document.getElementById('codigoPython').innerText;
+      navigator.clipboard.writeText(codigo).then(function() {
+        document.getElementById('copiadoMsg').style.display = 'inline';
+        setTimeout(() => {
+          document.getElementById('copiadoMsg').style.display = 'none';
+        }, 2000);
+      });
+    }
+
+    // Função para baixar o script Python e mostrar instruções
+    function baixarScript() {
+      // Cria um blob do código Python
+      const codigo = document.getElementById('codigoPython').innerText;
+      const blob = new Blob([codigo], { type: 'text/x-python' });
+      const url = URL.createObjectURL(blob);
+
+      // Cria um link temporário para download
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'abrir_github.py';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Mostra instruções para o usuário
+      document.getElementById('instrucoes').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

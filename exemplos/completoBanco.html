@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD de Carros Completo (Demo)</title>
+  <link rel="stylesheet" href="../global.css">
+  <style>
+    /* CSS extra para o CRUD */
+    .crud-form { max-width: 400px; margin: 32px auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px #1e88e510; padding: 24px; }
+    .crud-form label { font-weight: 600; color: #1976d2; margin-bottom: 4px; display: block; }
+    .crud-form input { width: 100%; margin-bottom: 12px; padding: 10px; border-radius: 8px; border: 1px solid #bdbdbd; }
+    .crud-form button { background: linear-gradient(45deg, #1976d2, #64b5f6); color: #fff; border: none; border-radius: 8px; padding: 10px 0; font-size: 1rem; font-weight: bold; cursor: pointer; margin-right: 8px; margin-bottom: 8px; }
+    .crud-form button:hover { background: linear-gradient(45deg, #1565c0, #42a5f5); }
+    .crud-table { width: 100%; margin-top: 24px; border-collapse: collapse; background: #fafbfc; border-radius: 10px; overflow: hidden; }
+    .crud-table th, .crud-table td { padding: 10px; border-bottom: 1px solid #e3e3e3; }
+    .crud-table th { background: #e3f2fd; color: #1976d2; }
+    .crud-table tr:last-child td { border-bottom: none; }
+    .crud-table tr:hover { background: #f1f8ff; }
+    .crud-actions button { padding: 4px 12px; border-radius: 6px; border: none; background: #1976d2; color: #fff; font-size: 0.95rem; cursor: pointer; margin-right: 4px; }
+    .crud-actions button:hover { background: #1565c0; }
+    .msg { margin: 12px 0; color: #388e3c; background: #e8f5e9; border-left: 4px solid #388e3c; padding: 8px 14px; border-radius: 6px; }
+    @media (max-width: 600px) { .crud-form { padding: 12px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h2>CRUD de Carros Completo</h2>
+    <form class="crud-form" id="carroForm">
+      <label for="codigo">Código</label>
+      <input type="number" id="codigo" required>
+      <label for="marca">Marca</label>
+      <input type="text" id="marca" required>
+      <label for="modelo">Modelo</label>
+      <input type="text" id="modelo" required>
+      <label for="ano">Ano</label>
+      <input type="number" id="ano" required>
+      <button type="submit">Gravar</button>
+      <button type="button" id="listarBtn">Listar</button>
+      <button type="button" id="limparBtn">Limpar</button>
+    </form>
+    <div id="msg" class="msg" style="display:none"></div>
+    <table class="crud-table" id="carrosTable" style="display:none">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Ano</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script>
+    // CRUD de carros em JS puro
+    let carros = [];
+    const form = document.getElementById('carroForm');
+    const table = document.getElementById('carrosTable');
+    const tbody = table.querySelector('tbody');
+    const msg = document.getElementById('msg');
+    const listarBtn = document.getElementById('listarBtn');
+    const limparBtn = document.getElementById('limparBtn');
+
+    // Exibe mensagem temporária para feedback do usuário
+    function showMsg(text) {
+      msg.textContent = text;
+      msg.style.display = 'block';
+      setTimeout(() => { msg.style.display = 'none'; }, 2000);
+    }
+
+    // Renderiza a tabela de carros
+    function renderTable() {
+      tbody.innerHTML = '';
+      carros.forEach((carro, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${carro.codigo}</td>
+          <td>${carro.marca}</td>
+          <td>${carro.modelo}</td>
+          <td>${carro.ano}</td>
+          <td class="crud-actions">
+            <button onclick="editarCarro(${idx})" title="Alterar">Alterar</button>
+            <button onclick="removerCarro(${idx})" title="Remover">Remover</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      table.style.display = carros.length ? 'table' : 'none';
+    }
+
+    // Edita um carro (preenche o formulário e remove da lista)
+    window.editarCarro = function(idx) {
+      const carro = carros[idx];
+      document.getElementById('codigo').value = carro.codigo;
+      document.getElementById('marca').value = carro.marca;
+      document.getElementById('modelo').value = carro.modelo;
+      document.getElementById('ano').value = carro.ano;
+      carros.splice(idx, 1);
+      renderTable();
+      showMsg('Preencha o formulário para alterar e gravar.');
+    };
+
+    // Remove um carro da lista
+    window.removerCarro = function(idx) {
+      carros.splice(idx, 1);
+      renderTable();
+      showMsg('Carro removido com sucesso!');
+    };
+
+    // Grava um novo carro ou altera um existente
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const codigo = parseInt(document.getElementById('codigo').value);
+      const marca = document.getElementById('marca').value.trim();
+      const modelo = document.getElementById('modelo').value.trim();
+      const ano = parseInt(document.getElementById('ano').value);
+      if (!codigo || !marca || !modelo || !ano) return showMsg('Preencha todos os campos!');
+      carros.push({ codigo, marca, modelo, ano });
+      renderTable();
+      showMsg('Carro gravado com sucesso!');
+      form.reset();
+    });
+
+    // Lista todos os carros
+    listarBtn.addEventListener('click', function() {
+      renderTable();
+      showMsg('Listando carros...');
+    });
+
+    // Limpa o formulário
+    limparBtn.addEventListener('click', function() {
+      form.reset();
+      msg.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
