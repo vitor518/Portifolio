@@ -16,12 +16,13 @@ Estes são os elementos essenciais que todo portfólio de desenvolvedor deve ter
     *   **O que é:** Uma breve introdução sobre quem você é, sua paixão por desenvolvimento, suas principais habilidades e o que você está buscando (estágio, vaga júnior, etc.).
     *   **Por que é importante:** Cria uma conexão pessoal e dá aos visitantes um resumo rápido de sua identidade profissional.
 
-3.  **Projetos em Destaque:**
+3.  **Projetos em Destaque (Estrutura Implementada):**
     *   **O que é:** Uma seleção dos seus melhores projetos (2 a 4 são suficientes). Cada projeto deve ter:
         *   Um título e uma breve descrição.
         *   As tecnologias utilizadas.
         *   Links para o **código-fonte** (GitHub) e, se possível, uma **demonstração ao vivo**.
     *   **Por que é importante:** Esta é a prova do seu trabalho. Projetos sem link para o código ou demo perdem muito valor.
+    *   **Status:** A estrutura para adicionar links de "Demo ao Vivo" foi implementada. Agora você só precisa adicionar as URLs corretas no arquivo `projects.json`.
 
 4.  **Design Responsivo (Mobile-First):**
     *   **O que é:** O site deve funcionar e ter uma boa aparência em todos os tamanhos de tela (celulares, tablets e desktops).

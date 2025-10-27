@@ -646,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>⭐ ${project.stars || 0} estrelas | 🔱 ${project.forks || 0} forks</p>
                 <div class="modal-buttons-footer">
                     ${project.githubURL ? `<a href="${project.githubURL}" target="_blank" rel="noopener noreferrer" class="github-btn full-width-btn" aria-label="Ver ${project.title} no GitHub"><i class="fab fa-github"></i> Ver no GitHub</a>` : ''}
-                    ${project.liveDemoURL ? `<a href="${project.liveDemoURL}" target="_blank" rel="noopener noreferrer" class="live-demo-btn full-width-btn" aria-label="Ver Demo ao Vivo de ${project.title}"><i class="fas fa-external-link-alt"></i> Demo ao Vivo</a>` : ''}
+                     ${project.liveDemoURL && project.liveDemoURL !== "#" ? `<a href="${project.liveDemoURL}" target="_blank" rel="noopener noreferrer" class="live-demo-btn full-width-btn" aria-label="Ver Demo ao Vivo de ${project.title}"><i class="fas fa-external-link-alt"></i> Demo ao Vivo</a>` : ''}
                 </div>
             `;
             App.elements.projectModal.classList.add('visible');
