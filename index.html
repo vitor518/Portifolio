@@ -36,7 +36,7 @@
     <!-- PWA & Theme -->
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#1e88e5">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#64b5f6">
-    <link rel="icon" href="img/favicon.ico" sizes="any">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
     <!-- Schema.org JSON-LD -->
@@ -66,7 +66,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-SEUCODIGO');
+      gtag('config', 'YOUR_GOOGLE_ANALYTICS_ID');
     </script>
 
     <!-- Font Optimization -->
@@ -131,6 +131,20 @@
             </button>
         </div>
     </header>
+
+    <!-- Navegação Mobile -->
+    <div id="mobile-nav" class="mobile-nav">
+        <nav aria-label="Navegação móvel">
+            <ul>
+                <li><a href="#sobre-mim">Sobre</a></li>
+                <li><a href="#experiencia">Experiência</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#educacao">Educação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
  
     <main class="container">
         <!-- SEÇÃO: SOBRE MIM -->
@@ -219,6 +233,21 @@
             </div>
         </section>
 
+        <!-- SEÇÃO: TESTEMUNHOS -->
+        <section id="testemunhos" aria-labelledby="testemunhos-heading">
+            <h2 id="testemunhos-heading">O Que Dizem Sobre Mim</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Vitor é um desenvolvedor extremamente dedicado e talentoso. Sua capacidade de resolver problemas complexos e sua atenção aos detalhes são admiráveis."</p>
+                    <cite>– João Silva, Desenvolvedor Sênior @ Empresa X</cite>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Trabalhar com o Vitor foi uma experiência incrível. Ele é proativo, comunicativo e sempre entrega um trabalho de alta qualidade. Recomendo fortemente!"</p>
+                    <cite>– Maria Souza, Gerente de Projetos @ Empresa Y</cite>
+                </div>
+            </div>
+        </section>
+
         <!-- SEÇÃO: CONTATO -->
         <section id="contato" aria-labelledby="contato-heading">
             <h2 id="contato-heading">Vamos Conversar!</h2>
@@ -237,7 +266,7 @@
             </div>
 
             <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
-                <input type="hidden" name="access_key" value="SUA_CHAVE_DE_ACESSO_AQUI">
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
                 <input type="hidden" name="subject" value="Novo Contato do Portfólio!">
                 <input type="hidden" name="from_name" value="Portfólio Vitor Oliveira">
                 <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
