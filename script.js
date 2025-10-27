@@ -414,7 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Usamos uma arrow function ou bind para manter o 'this' como 'Navigation'
         // ou definimos como função normal e acessamos elementos globais, como feito aqui.
         toggleMobileNav() {
-            document.body.classList.toggle('mobile-nav-open');
             if (App.elements.mobileNav) App.elements.mobileNav.classList.toggle('open');
             const overlayEl = document.querySelector('.overlay');
             if (overlayEl) overlayEl.classList.toggle('open');
@@ -431,9 +430,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Vírgula após init() corrigida.
     // -----------------------------------------------------------------------------
     const ProjectManager = {
-+        imageObserver: null,
-+        modalFocusHandler: null,
-+        previouslyFocusedElement: null,
+        imageObserver: null,
+        modalFocusHandler: null,
+        previouslyFocusedElement: null,
         async init() {
             this.showSkeletonLoader();
             try {
@@ -451,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.renderFilterButtons();
             this.renderProjects(App.state.allProjects);
             this.addEventListeners();
-        }, // <-- VÍRGULA ADICIONADA AQUI
+        },
         addEventListeners() {
             if (App.elements.projectFiltersContainer) {
                 App.elements.projectFiltersContainer.addEventListener('click', (e) => {
@@ -508,36 +507,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 App.elements.projectsGrid.innerHTML = `<p class="no-projects">Nenhum projeto encontrado. Tente redefinir os filtros.</p>`;
                 return;
             }
-+            // limpa observer anterior
-+            if (this.imageObserver) {
-+                this.imageObserver.disconnect();
-+                this.imageObserver = null;
-+            }
+            if (this.imageObserver) {
+                this.imageObserver.disconnect();
+                this.imageObserver = null;
+            }
             projects.forEach(project => {
--                const projectCard = document.createElement('div');
-+                const projectCard = document.createElement('div');
-                 projectCard.className = 'project-card';
-                 projectCard.dataset.projectName = project.title;
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.dataset.projectName = project.title;
  
--                const technologiesHTML = project.technologies.map(tech => `<span class="tag">${tech}</span>`).join('');
-+                const technologiesHTML = project.technologies.map(tech => `<span class="tag">${tech}</span>`).join('');
+                const technologiesHTML = project.technologies.map(tech => `<span class="tag">${tech}</span>`).join('');
  
-                 const badgesHTML = project.badges ? project.badges.map(badge => {
-                     const badgeClass = `badge badge-${badge.toLowerCase().replace(' ', '-')}`;
-                     return `<span class="${badgeClass}">${badge}</span>`;
-                 }).join('') : '';
+                const badgesHTML = project.badges ? project.badges.map(badge => {
+                    const badgeClass = `badge badge-${badge.toLowerCase().replace(' ', '-')}`;
+                    return `<span class="${badgeClass}">${badge}</span>`;
+                }).join('') : '';
  
-                 const githubButton = project.isPublic && project.githubURL
-                     ? `<a href="${project.githubURL}" target="_blank" rel="noopener noreferrer" class="github-btn" aria-label="Ver ${project.title} no GitHub"><i class="fab fa-github"></i> GitHub</a>`
-                     : `<a class="github-btn disabled" aria-label="Repositório privado"><i class="fab fa-github"></i> Privado</a>`;
+                const githubButton = project.isPublic && project.githubURL
+                    ? `<a href="${project.githubURL}" target="_blank" rel="noopener noreferrer" class="github-btn" aria-label="Ver ${project.title} no GitHub"><i class="fab fa-github"></i> GitHub</a>`
+                    : `<a class="github-btn disabled" aria-label="Repositório privado"><i class="fab fa-github"></i> Privado</a>`;
  
--                projectCard.innerHTML = `
-+                // Usa data-src para lazy-loading; src placeholder 1x1
-+                const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-+                projectCard.innerHTML = `
+                const imgPlaceholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+                projectCard.innerHTML = `
                      <div class="card-image-container">
--                        <img src="${project.image}" alt="Imagem do projeto ${project.title}" class="card-image" loading="lazy">
-+                        <img src="${imgPlaceholder}" data-src="${project.image}" alt="Imagem do projeto ${project.title}" class="card-image lazy" loading="lazy" aria-hidden="false">
+                        <img src="${imgPlaceholder}" data-src="${project.image}" alt="Imagem do projeto ${project.title}" class="card-image lazy" loading="lazy" aria-hidden="false">
                          ${!project.isPublic ? '<i class="fas fa-lock privacy-icon" title="Repositório Privado"></i>' : ''}
                          <div class="card-badges">${badgesHTML}</div>
                      </div>
@@ -558,185 +551,178 @@ document.addEventListener('DOMContentLoaded', () => {
                          </div>
                      </div>
                  `;
-                 App.elements.projectsGrid.appendChild(projectCard);
-             });
-+            // Inicializa lazy-loading das imagens após render
-+            this.initImageObserver();
-+            // Se Font Awesome NÃO está disponível, garantimos fallback para ícones recém-inseridos
-+            if (!window.FA_AVAILABLE) {
-+                Effects.replaceIconsWithSVG();
-+            }
-         },
-+        initImageObserver() {
-+            if ('IntersectionObserver' in window) {
-+                const imgs = document.querySelectorAll('img.lazy');
-+                this.imageObserver = new IntersectionObserver((entries, obs) => {
-+                    entries.forEach(entry => {
-+                        if (entry.isIntersecting) {
-+                            const img = entry.target;
-+                            const src = img.dataset.src;
-+                            if (src) {
-+                                img.src = src;
-+                                img.classList.remove('lazy');
-+                                obs.unobserve(img);
-+                            }
-+                        }
-+                    });
-+                }, { rootMargin: '100px 0px', threshold: 0.01 });
-+                document.querySelectorAll('img.lazy').forEach(img => this.imageObserver.observe(img));
-+            } else {
-+                // Fallback: carrega todas imediatamente
-+                document.querySelectorAll('img.lazy').forEach(img => {
-+                    if (img.dataset.src) img.src = img.dataset.src;
-+                });
-+            }
-+        },
-+        // ---- Modal focus trap & ESC ----
-+        attachModalFocusTrap(modalEl) {
-+            this.previouslyFocusedElement = document.activeElement;
-+            const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-+            const focusable = modalEl.querySelectorAll(focusableSelector);
-+            const first = focusable[0];
-+            const last = focusable[focusable.length - 1];
-+            // ensure modal content is focusable
-+            const modalContent = modalEl.querySelector('.modal-content');
-+            if (modalContent) modalContent.focus();
-+
-+            this.modalFocusHandler = (e) => {
-+                if (e.key === 'Tab') {
-+                    if (focusable.length === 0) {
-+                        e.preventDefault();
-+                        return;
-+                    }
-+                    if (e.shiftKey) { /* shift+tab */
-+                        if (document.activeElement === first) {
-+                            e.preventDefault();
-+                            last.focus();
-+                        }
-+                    } else { /* tab */
-+                        if (document.activeElement === last) {
-+                            e.preventDefault();
-+                            first.focus();
-+                        }
-+                    }
-+                } else if (e.key === 'Escape' || e.key === 'Esc') {
-+                    e.preventDefault();
-+                    this.closeModal();
-+                }
-+            };
-+            document.addEventListener('keydown', this.modalFocusHandler);
-+        },
-+        detachModalFocusTrap() {
-+            if (this.modalFocusHandler) {
-+                document.removeEventListener('keydown', this.modalFocusHandler);
-+                this.modalFocusHandler = null;
-+            }
-+            if (this.previouslyFocusedElement && this.previouslyFocusedElement.focus) {
-+                this.previouslyFocusedElement.focus();
-+            }
-+            this.previouslyFocusedElement = null;
-+        },
-         openModal(projectId) {
-             const project = App.state.allProjects.find(p => p.id === projectId);
-             if (!project) return;
- 
-             const featuresHTML = project.features ? project.features.map(f => `<li>${f}</li>`).join('') : '<li>Nenhuma característica detalhada.</li>';
- 
-             if (!App.elements.modalBody || !App.elements.projectModal) return;
- 
-             App.elements.modalBody.innerHTML = `
-                 <img src="${project.image}" alt="${project.title}" style="width:100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
-                 <h3 id="modal-title">📌 ${project.title}</h3>
-                 <p>${project.longDescription || project.description}</p>
-                 <h4>🛠️ Tecnologias</h4>
-                 <div class="card-tags">${project.technologies.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                 <h4>✨ Características</h4>
-                 <ul>${featuresHTML}</ul>
-                 <h4>📊 Estatísticas</h4>
-                 <p>⭐ ${project.stars || 0} estrelas | 🔱 ${project.forks || 0} forks</p>
-                 <div class="modal-buttons-footer">
-                     ${project.githubURL ? `<a href="${project.githubURL}" target="_blank" rel="noopener noreferrer" class="github-btn full-width-btn" aria-label="Ver ${project.title} no GitHub"><i class="fab fa-github"></i> Ver no GitHub</a>` : ''}
-                     ${project.liveDemoURL ? `<a href="${project.liveDemoURL}" target="_blank" rel="noopener noreferrer" class="live-demo-btn full-width-btn" aria-label="Ver Demo ao Vivo de ${project.title}"><i class="fas fa-external-link-alt"></i> Demo ao Vivo</a>` : ''}
-                 </div>
-             `;
--            App.elements.projectModal.classList.add('visible');
--            document.body.style.overflow = 'hidden';
-+            App.elements.projectModal.classList.add('visible');
-+            App.elements.projectModal.setAttribute('aria-hidden', 'false');
-+            document.body.style.overflow = 'hidden';
-+            // attach focus trap
-+            this.attachModalFocusTrap(App.elements.projectModal);
-         },
-         closeModal() {
-             if (!App.elements.projectModal) return;
--            App.elements.projectModal.classList.remove('visible');
--            document.body.style.overflow = '';
-+            App.elements.projectModal.classList.remove('visible');
-+            App.elements.projectModal.setAttribute('aria-hidden', 'true');
-+            document.body.style.overflow = '';
-+            // detach focus trap and restore focus
-+            this.detachModalFocusTrap();
-         },
-+        // ---- Export helpers ----
-+        exportAsTypeScript() {
-+            const content = `export const PROJECTS = ${JSON.stringify(App.state.allProjects, null, 2)} as const;\n`;
-+            this.downloadFile(content, 'projects.ts', 'application/typescript');
-+        },
-+        exportAsMarkdown() {
-+            const md = App.state.allProjects.map(p => {
-+                return `## ${p.title}\n\n**Categoria:** ${p.category}\n\n**Status:** ${p.status}\n\n**Tecnologias:** ${p.technologies.join(', ')}\n\n**Descrição:**\n\n${p.description}\n\n---\n`;
-+            }).join('\n');
-+            this.downloadFile(md, 'projects.md', 'text/markdown');
-+        },
-+        downloadFile(content, filename, mime) {
-+            const blob = new Blob([content], { type: mime });
-+            const url = URL.createObjectURL(blob);
-+            const a = document.createElement('a');
-+            a.href = url;
-+            a.download = filename;
-+            document.body.appendChild(a);
-+            a.click();
-+            a.remove();
-+            URL.revokeObjectURL(url);
-+        },
-         // Helpers
-         debounce(func, delay) {
-             let timeout;
-             return function (...args) {
-                 clearTimeout(timeout);
-                 timeout = setTimeout(() => func.apply(this, args), delay);
-             };
-         },
-         formatDate(dateString) {
-             if (!dateString) return 'Em breve';
-             const date = new Date(dateString);
-             const now = new Date();
-             const diffTime = Math.abs(now - date);
-             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-             
-             if (diffDays <= 7) return `Atualizado há ${diffDays} dia${diffDays > 1 ? 's' : ''}`;
-             
-             const diffMonths = Math.floor(diffDays / 30);
-             if (diffMonths <= 12) return `Atualizado há ${diffMonths} ${diffMonths > 1 ? 'meses' : 'mês'}`;
-             
-             const diffYears = Math.floor(diffDays / 365);
-             return `Atualizado há ${diffYears} ${diffYears > 1 ? 'anos' : 'ano'}`;
-         },
-         getLanguageColor(language) {
-             const colors = {
-                 "TypeScript": "#3178c6",
-                 "JavaScript": "#f7df1e",
-                 "Java": "#007396",
-                 "PHP": "#777bb4",
-                 "C#": "#239120",
-                 "HTML": "#e34c26",
-                 "CSS": "#563d7c",
-                 "Python": "#3572A5",
-                 "C++": "#f34b7d",
-                 "Go": "#00ADD8"
-             };
-             return colors[language] || '#cccccc'; // Cor padrão
-         }
+                App.elements.projectsGrid.appendChild(projectCard);
+            });
+            this.initImageObserver();
+            if (!window.FA_AVAILABLE) {
+                Effects.replaceIconsWithSVG();
+            }
+        },
+        initImageObserver() {
+            if ('IntersectionObserver' in window) {
+                const imgs = document.querySelectorAll('img.lazy');
+                this.imageObserver = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const src = img.dataset.src;
+                            if (src) {
+                                img.src = src;
+                                img.classList.remove('lazy');
+                                obs.unobserve(img);
+                            }
+                        }
+                    });
+                }, { rootMargin: '100px 0px', threshold: 0.01 });
+                document.querySelectorAll('img.lazy').forEach(img => this.imageObserver.observe(img));
+            } else {
+                // Fallback: carrega todas imediatamente
+                document.querySelectorAll('img.lazy').forEach(img => {
+                    if (img.dataset.src) img.src = img.dataset.src;
+                });
+            }
+        },
+        attachModalFocusTrap(modalEl) {
+            this.previouslyFocusedElement = document.activeElement;
+            const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+            const focusable = modalEl.querySelectorAll(focusableSelector);
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            // ensure modal content is focusable
+            const modalContent = modalEl.querySelector('.modal-content');
+            if (modalContent) modalContent.focus();
+
+            this.modalFocusHandler = (e) => {
+                if (e.key === 'Tab') {
+                    if (focusable.length === 0) {
+                        e.preventDefault();
+                        return;
+                    }
+                    if (e.shiftKey) { /* shift+tab */
+                        if (document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        }
+                    } else { /* tab */
+                        if (document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                } else if (e.key === 'Escape' || e.key === 'Esc') {
+                    e.preventDefault();
+                    this.closeModal();
+                }
+            };
+            document.addEventListener('keydown', this.modalFocusHandler);
+        },
+        detachModalFocusTrap() {
+            if (this.modalFocusHandler) {
+                document.removeEventListener('keydown', this.modalFocusHandler);
+                this.modalFocusHandler = null;
+            }
+            if (this.previouslyFocusedElement && this.previouslyFocusedElement.focus) {
+                this.previouslyFocusedElement.focus();
+            }
+            this.previouslyFocusedElement = null;
+        },
+        openModal(projectId) {
+            const project = App.state.allProjects.find(p => p.id === projectId);
+            if (!project) return;
+
+            const featuresHTML = project.features ? project.features.map(f => `<li>${f}</li>`).join('') : '<li>Nenhuma característica detalhada.</li>';
+
+            if (!App.elements.modalBody || !App.elements.projectModal) return;
+
+            App.elements.modalBody.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" style="width:100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
+                <h3 id="modal-title">📌 ${project.title}</h3>
+                <p>${project.longDescription || project.description}</p>
+                <h4>🛠️ Tecnologias</h4>
+                <div class="card-tags">${project.technologies.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                <h4>✨ Características</h4>
+                <ul>${featuresHTML}</ul>
+                <h4>📊 Estatísticas</h4>
+                <p>⭐ ${project.stars || 0} estrelas | 🔱 ${project.forks || 0} forks</p>
+                <div class="modal-buttons-footer">
+                    ${project.githubURL ? `<a href="${project.githubURL}" target="_blank" rel="noopener noreferrer" class="github-btn full-width-btn" aria-label="Ver ${project.title} no GitHub"><i class="fab fa-github"></i> Ver no GitHub</a>` : ''}
+                    ${project.liveDemoURL ? `<a href="${project.liveDemoURL}" target="_blank" rel="noopener noreferrer" class="live-demo-btn full-width-btn" aria-label="Ver Demo ao Vivo de ${project.title}"><i class="fas fa-external-link-alt"></i> Demo ao Vivo</a>` : ''}
+                </div>
+            `;
+            App.elements.projectModal.classList.add('visible');
+            App.elements.projectModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            // attach focus trap
+            this.attachModalFocusTrap(App.elements.projectModal);
+        },
+        closeModal() {
+            if (!App.elements.projectModal) return;
+            App.elements.projectModal.classList.remove('visible');
+            App.elements.projectModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            // detach focus trap and restore focus
+            this.detachModalFocusTrap();
+        },
+        // ---- Export helpers ----
+        exportAsTypeScript() {
+            const content = `export const PROJECTS = ${JSON.stringify(App.state.allProjects, null, 2)} as const;\n`;
+            this.downloadFile(content, 'projects.ts', 'application/typescript');
+        },
+        exportAsMarkdown() {
+            const md = App.state.allProjects.map(p => {
+                return `## ${p.title}\n\n**Categoria:** ${p.category}\n\n**Status:** ${p.status}\n\n**Tecnologias:** ${p.technologies.join(', ')}\n\n**Descrição:**\n\n${p.description}\n\n---\n`;
+            }).join('\n');
+            this.downloadFile(md, 'projects.md', 'text/markdown');
+        },
+        downloadFile(content, filename, mime) {
+            const blob = new Blob([content], { type: mime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        },
+        // Helpers
+        debounce(func, delay) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        },
+        formatDate(dateString) {
+            if (!dateString) return 'Em breve';
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays <= 7) return `Atualizado há ${diffDays} dia${diffDays > 1 ? 's' : ''}`;
+
+            const diffMonths = Math.floor(diffDays / 30);
+            if (diffMonths <= 12) return `Atualizado há ${diffMonths} ${diffMonths > 1 ? 'meses' : 'mês'}`;
+
+            const diffYears = Math.floor(diffDays / 365);
+            return `Atualizado há ${diffYears} ${diffYears > 1 ? 'anos' : 'ano'}`;
+        },
+        getLanguageColor(language) {
+            const colors = {
+                "TypeScript": "#3178c6",
+                "JavaScript": "#f7df1e",
+                "Java": "#007396",
+                "PHP": "#777bb4",
+                "C#": "#239120",
+                "HTML": "#e34c26",
+                "CSS": "#563d7c",
+                "Python": "#3572A5",
+                "C++": "#f34b7d",
+                "Go": "#00ADD8"
+            };
+            return colors[language] || '#cccccc'; // Cor padrão
+        }
     };
 
     // -----------------------------------------------------------------------------
@@ -792,34 +778,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // DEBUG: Verifica se Font Awesome carregou e aplica fallback inteligente
     window.addEventListener('load', () => {
--        const faTest = document.querySelector('.fab, .fas');
--        if (faTest) {
--            const styles = window.getComputedStyle(faTest, ':before');
--            const fontFamily = styles.getPropertyValue('font-family') || '';
--            if (fontFamily.toLowerCase().includes('font awesome')) {
--                console.log('✅ Font Awesome carregado com sucesso!');
--            } else {
--                console.warn('❌ Font Awesome NÃO carregou - aplicando fallback SVG.');
--                Effects.replaceIconsWithSVG();
--            }
--        } else {
--            // Se não houver elementos com .fab/.fas no DOM ainda, força fallback para ícones com <i>
--            Effects.replaceIconsWithSVG();
--        }
-+        const faTest = document.querySelector('.fab, .fas');
-+        let faAvailable = false;
-+        if (faTest) {
-+            const styles = window.getComputedStyle(faTest, ':before');
-+            const fontFamily = styles.getPropertyValue('font-family') || '';
-+            faAvailable = fontFamily.toLowerCase().includes('font awesome');
-+        }
-+        // Define flag global para uso posterior (ex.: depois da renderização dos projetos)
-+        window.FA_AVAILABLE = !!faAvailable;
-+        if (window.FA_AVAILABLE) {
-+            console.log('✅ Font Awesome carregado com sucesso!');
-+        } else {
-+            console.warn('❌ Font Awesome NÃO carregou - aplicando fallback SVG.');
-+            Effects.replaceIconsWithSVG();
-+        }
+        const faTest = document.querySelector('.fab, .fas');
+        let faAvailable = false;
+        if (faTest) {
+            const styles = window.getComputedStyle(faTest, ':before');
+            const fontFamily = styles.getPropertyValue('font-family') || '';
+            faAvailable = fontFamily.toLowerCase().includes('font awesome');
+        }
+        // Define flag global para uso posterior (ex.: depois da renderização dos projetos)
+        window.FA_AVAILABLE = !!faAvailable;
+        if (window.FA_AVAILABLE) {
+            console.log('✅ Font Awesome carregado com sucesso!');
+        } else {
+            console.warn('❌ Font Awesome NÃO carregou - aplicando fallback SVG.');
+            Effects.replaceIconsWithSVG();
+        }
     });
 });

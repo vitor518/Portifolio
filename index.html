@@ -66,7 +66,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-SEUCODIGO');
+      gtag('config', 'YOUR_GOOGLE_ANALYTICS_ID');
     </script>
 
     <!-- Font Optimization -->
@@ -131,6 +131,20 @@
             </button>
         </div>
     </header>
+
+    <!-- Navegação Mobile -->
+    <div id="mobile-nav" class="mobile-nav">
+        <nav aria-label="Navegação móvel">
+            <ul>
+                <li><a href="#sobre-mim">Sobre</a></li>
+                <li><a href="#experiencia">Experiência</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#educacao">Educação</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
  
     <main class="container">
         <!-- SEÇÃO: SOBRE MIM -->
@@ -237,7 +251,7 @@
             </div>
 
             <form action="https://api.web3forms.com/submit" method="POST" class="contact-form" id="contact-form">
-                <input type="hidden" name="access_key" value="SUA_CHAVE_DE_ACESSO_AQUI">
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
                 <input type="hidden" name="subject" value="Novo Contato do Portfólio!">
                 <input type="hidden" name="from_name" value="Portfólio Vitor Oliveira">
                 <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
