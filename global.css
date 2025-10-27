@@ -25,17 +25,17 @@
 
 /* TEMA ESCURO */
 body.dark-mode {
-    --primary-color: #f46036;       /* Laranja primário */
-    --secondary-color: #d72638;     /* Vermelho secundário */
-    --accent-color: #1e88e5;         /* Azul (usado para destaque) */
+    --primary-color: #64b5f6;       /* Azul mais suave */
+    --secondary-color: #42a5f5;     /* Azul secundário */
+    --accent-color: #ff6b6b;        /* Vermelho suave para destaques */
 
-    --bg-main: #121212;              /* Fundo principal (escuro) */
-    --bg-section: #1e1e1e;           /* Fundo das seções (escuro) */
+    --bg-main: #0d1117;             /* Fundo principal (GitHub dark) */
+    --bg-section: #161b22;          /* Fundo das seções */
 
-    --text-primary: #e0e0e0;         /* Texto principal (claro) */
-    --text-secondary: #a0a0a0;       /* Texto secundário (cinza claro) */
+    --text-primary: #c9d1d9;        /* Texto principal */
+    --text-secondary: #8b949e;      /* Texto secundário */
 
-    --border-color: #333333;         /* Cor da borda */
+    --border-color: #30363d;        /* Cor da borda */
 
     --shadow-light: rgba(0, 0, 0, 0.2);
     --shadow-medium: rgba(0, 0, 0, 0.4);
@@ -149,7 +149,7 @@ header h1 {
     z-index: 1001;
 }
 .mobile-nav {
-    display: none; /* Escondido por padrão */
+    display: none; /* mantido por padrão em desktop */
     position: fixed;
     top: 0;
     right: -100%; /* Começa fora da tela */
@@ -162,6 +162,7 @@ header h1 {
     z-index: 1000;
 }
 .mobile-nav.open {
+    display: block; /* garante visibilidade quando aberto no mobile */
     right: 0;
 }
 .mobile-nav nav ul {
@@ -300,17 +301,23 @@ header h1 {
     gap: 5px;
 }
 .badge {
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    background-color: rgba(0,0,0,0.7);
 }
-.badge-recent { background-color: #4CAF50; }
-.badge-destaque { background-color: var(--accent-color); }
-.badge-seguranca { background-color: #f44336; }
-/* ... outras cores de badge ... */
+.badge-recente { background: linear-gradient(135deg, #4CAF50, #45a049); }
+.badge-destaque { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); }
+.badge-seguranca { background: linear-gradient(135deg, #f44336, #e53935); }
+.badge-devops { background: linear-gradient(135deg, #2196F3, #1976D2); }
+.badge-backend { background: linear-gradient(135deg, #9C27B0, #7B1FA2); }
+.badge-frontend { background: linear-gradient(135deg, #FF9800, #F57C00); }
+.badge-fullstack { background: linear-gradient(135deg, #00BCD4, #0097A7); }
+/* Corrigido de .badge-full.stack para .badge-fullstack */
 .privacy-icon {
     position: absolute;
     top: 10px;
@@ -469,10 +476,11 @@ header h1 {
 @keyframes pulse {
     0% { background-color: var(--border-color); }
     50% { background-color: #e8e8e8; }
-    body.dark-mode & {
-      50% { background-color: #444; }
-    }
     100% { background-color: var(--border-color); }
+}
+body.dark-mode .skeleton-line,
+body.dark-mode .skeleton-image {
+    background-color: #444 !important;
 }
 
 /* FORMULÁRIO DE CONTATO */
@@ -536,4 +544,316 @@ footer {
     .desktop-nav { display: none; }
     .mobile-nav-toggle { display: block; }
     .project-controls { flex-direction: column; align-items: stretch; }
+}
+
+/* =================================================================
+   FIX: Toggle de Tema - Ícones e Posicionamento
+   ================================================================= */
+
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    background: var(--bg-section);
+    padding: 10px 15px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px var(--shadow-medium);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.theme-switch-wrapper:hover {
+    box-shadow: 0 6px 20px var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+
+/* Ícones do sol e lua */
+.theme-switch-wrapper i {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.theme-switch-wrapper .fa-sun {
+    color: #ffa500;
+}
+
+.theme-switch-wrapper .fa-moon {
+    color: #4a5568;
+}
+
+body.dark-mode .theme-switch-wrapper .fa-sun {
+    color: #666;
+}
+
+body.dark-mode .theme-switch-wrapper .fa-moon {
+    color: #ffd700;
+}
+
+/* Switch slider */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Animação de pulso ao trocar tema */
+.theme-switch-wrapper.pulse {
+    animation: pulse-ring 0.6s ease-out;
+}
+
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(100, 181, 246, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(100, 181, 246, 0);
+    }
+}
+
+/* Barra de Progresso de Scroll - Melhorada */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        var(--primary-color) 0%, 
+        var(--secondary-color) 50%, 
+        var(--accent-color) 100%
+    );
+    z-index: 10000;
+    box-shadow: 0 2px 10px rgba(100, 181, 246, 0.5);
+    transition: width 0.1s ease-out;
+}
+
+/* =================================================================
+   MELHORIAS DE DESIGN - Modo escuro mais sutil
+   ================================================================= */
+
+/* Ajusta tema escuro para ser menos agressivo */
+body.dark-mode {
+    --primary-color: #64b5f6;       /* Azul mais suave */
+    --secondary-color: #42a5f5;     /* Azul secundário */
+    --accent-color: #ff6b6b;        /* Vermelho suave para destaques */
+
+    --bg-main: #0d1117;             /* Fundo principal (GitHub dark) */
+    --bg-section: #161b22;          /* Fundo das seções */
+
+    --text-primary: #c9d1d9;        /* Texto principal */
+    --text-secondary: #8b949e;      /* Texto secundário */
+
+    --border-color: #30363d;        /* Cor da borda */
+}
+
+/* Melhora visual das seções */
+section {
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 32px var(--shadow-medium);
+}
+
+/* Melhora os títulos H2 */
+h2 {
+    font-size: 2rem;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+h2:hover::after {
+    width: 100%;
+}
+
+/* Melhora cards de projetos */
+.project-card {
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-8px);
+    box-shadow: 
+        0 12px 24px var(--shadow-medium),
+        0 0 0 1px var(--primary-color);
+}
+
+/* Melhora badges */
+.badge {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-recente { background: linear-gradient(135deg, #4CAF50, #45a049); }
+.badge-destaque { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); }
+.badge-seguranca { background: linear-gradient(135deg, #f44336, #e53935); }
+.badge-devops { background: linear-gradient(135deg, #2196F3, #1976D2); }
+.badge-backend { background: linear-gradient(135deg, #9C27B0, #7B1FA2); }
+.badge-frontend { background: linear-gradient(135deg, #FF9800, #F57C00); }
+.badge-fullstack { background: linear-gradient(135deg, #00BCD4, #0097A7); }
+/* Corrigido de .badge-full.stack para .badge-fullstack */
+
+/* MENU MOBILE - garante que abra quando .open estiver presente */
+.mobile-nav {
+    display: none; /* mantido por padrão em desktop */
+    position: fixed;
+    top: 0;
+    right: -100%; /* Começa fora da tela */
+    width: 70%;
+    max-width: 300px;
+    height: 100%;
+    background-color: var(--bg-section);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: right 0.4s ease-in-out;
+    z-index: 1000;
+}
+.mobile-nav.open {
+    display: block; /* garante visibilidade quando aberto no mobile */
+    right: 0;
+}
+
+/* Toaster simples */
+.toast {
+    position: relative;
+    display: inline-block;
+    background: rgba(33,33,33,0.95);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin: 0.5rem;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    font-weight: 600;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.toast-success { background: linear-gradient(90deg,#4caf50,#43a047); }
+.toast-error { background: linear-gradient(90deg,#e53935,#d32f2f); }
+.toast-info { background: linear-gradient(90deg,#2196f3,#1976d2); }
+
+/* Container do toast (posicionado no topo direito) */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 11000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+/* Ícone-fallback (substitui <i> quando FA não estiver disponível) */
+.icon-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    line-height: 1;
+}
+.icon-fallback svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Pequeno espaçamento quando usado em listas de habilidades */
+.skills-list li .icon-fallback {
+    margin-right: 8px;
+}
+
+/* Mensagem quando não há projetos */
+.no-projects {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Modal footer / botões no modal */
+.modal-buttons-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Botão GitHub full width quando usado no modal */
+.github-btn.full-width-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
 }
